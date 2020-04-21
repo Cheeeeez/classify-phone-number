@@ -1,4 +1,5 @@
 <?php
+include_once "Function.php";
 define('VIETTEL', ['086', '096', '097', '098', '032', '033', '034', '035', '036', '037', '038', '039']);
 define('MOBIPHONE', ['089', '090', '093', '070', '079', '077', '076', '078']);
 define('VINAPHONE', ['088', '091', '094', '083', '084', '085', '081', '082']);
@@ -13,22 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $vinaphone = [];
     $viettel = [];
     classifyPhoneNumber($phoneNumberArray);
-}
-
-function classifyPhoneNumber($array)
-{
-    global $viettel, $mobiphone, $vinaphone;
-    for ($i = 0; $i < count($array); $i++) {
-        for ($j = 0; $j < count(VIETTEL); $j++) {
-            if ($array[$i][FIRST_NUMBER] . $array[$i][SECOND_NUMBER] . $array[$i][THIRD_NUMBER] == VIETTEL[$j]) {
-                array_push($viettel, $array[$i]);
-            } elseif ($array[$i][FIRST_NUMBER] . $array[$i][SECOND_NUMBER] . $array[$i][THIRD_NUMBER] == VINAPHONE[$j]) {
-                array_push($vinaphone, $array[$i]);
-            } elseif ($array[$i][FIRST_NUMBER] . $array[$i][SECOND_NUMBER] . $array[$i][THIRD_NUMBER] == MOBIPHONE[$j]) {
-                array_push($mobiphone, $array[$i]);
-            }
-        }
-    }
 }
 
 ?>
@@ -58,7 +43,7 @@ if (!empty($viettel)) {
 }
 
 if (!empty($vinaphone)) {
-    echo 'Những số điện thoại viettel là: ';
+    echo 'Những số điện thoại vinaphone là: ';
     echo "<ul>";
     foreach ($vinaphone as $phone) {
         echo "<li>$phone</li>";
@@ -67,7 +52,7 @@ if (!empty($vinaphone)) {
 }
 
 if (!empty($mobiphone)) {
-    echo 'Những số điện thoại viettel là: ';
+    echo 'Những số điện thoại mobiphone là: ';
     echo "<ul>";
     foreach ($mobiphone as $phone) {
         echo "<li>$phone</li>";
