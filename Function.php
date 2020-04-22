@@ -1,17 +1,21 @@
 <?php
-function classifyPhoneNumber($array)
+function classifyPhoneNumber($array, $carrier)
 {
-    global $viettel, $mobiphone, $vinaphone;
+    $data = [];
     for ($i = 0; $i < count($array); $i++) {
         $firstThreeNumber = substr($array[$i], FIRST_NUMBER_INDEX, THIRD_NUMBER);
         for ($j = 0; $j < count(VIETTEL); $j++) {
-            if ($firstThreeNumber == VIETTEL[$j]) {
-                array_push($viettel, $array[$i]);
-            } elseif ($firstThreeNumber == VINAPHONE[$j]) {
-                array_push($vinaphone, $array[$i]);
-            } elseif ($firstThreeNumber == MOBIPHONE[$j]) {
-                array_push($mobiphone, $array[$i]);
+            if ($firstThreeNumber == $carrier[$j]) {
+                array_push($data, $array[$i]);
             }
         }
+    }
+    return $data;
+}
+
+function display($arr)
+{
+    foreach ($arr as $item) {
+        echo $item . "<br>";
     }
 }

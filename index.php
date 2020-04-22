@@ -9,10 +9,9 @@ define('THIRD_NUMBER', 3);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phoneNumberList = $_REQUEST["phone-number"];
     $phoneNumberArray = explode(',', $phoneNumberList);
-    $mobiphone = [];
-    $vinaphone = [];
-    $viettel = [];
-    classifyPhoneNumber($phoneNumberArray);
+    $mobiphone = classifyPhoneNumber($phoneNumberArray, MOBIPHONE);
+    $vinaphone = classifyPhoneNumber($phoneNumberArray, VINAPHONE);
+    $viettel = classifyPhoneNumber($phoneNumberArray, VIETTEL);
 }
 
 ?>
@@ -24,6 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            text-align: center;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+
+        td {
+            vertical-align: top;
+        }
+    </style>
 </head>
 <body>
 <form action="" method="post">
@@ -31,33 +46,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Classify</button>
 </form>
 <br>
-<?php
-if (!empty($viettel)) {
-    echo 'Những số điện thoại viettel là: ';
-    echo "<ul>";
-    foreach ($viettel as $phone) {
-        echo "<li>$phone</li>";
-    }
-    echo "</ul>";
-}
+<?php if (isset($_REQUEST["phone-number"])): ?>
+    <table>
+        <tr>
+            <th>VIETTEL</th>
+            <th>VINAPHONE</th>
+            <th>MOBIPHONE</th>
+        </tr>
+        <tr>
+            <td><?php display($viettel); ?></td>
+            <td><?php display($vinaphone); ?></td>
+            <td><?php display($mobiphone); ?></td>
+        </tr>
+    </table>
+<?php endif; ?>
 
-if (!empty($vinaphone)) {
-    echo 'Những số điện thoại vinaphone là: ';
-    echo "<ul>";
-    foreach ($vinaphone as $phone) {
-        echo "<li>$phone</li>";
-    }
-    echo "</ul>";
-}
 
-if (!empty($mobiphone)) {
-    echo 'Những số điện thoại mobiphone là: ';
-    echo "<ul>";
-    foreach ($mobiphone as $phone) {
-        echo "<li>$phone</li>";
-    }
-    echo "</ul>";
-}
-?>
 </body>
 </html>
