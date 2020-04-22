@@ -3,7 +3,7 @@ function classifyPhoneNumber($array)
 {
     global $viettel, $mobiphone, $vinaphone;
     for ($i = 0; $i < count($array); $i++) {
-        $firstThreeNumber = substr($array[$i], FIRST_NUMBER_INDEX, 3);
+        $firstThreeNumber = substr($array[$i], FIRST_NUMBER_INDEX, THIRD_NUMBER);
         for ($j = 0; $j < count(VIETTEL); $j++) {
             if ($firstThreeNumber == VIETTEL[$j]) {
                 array_push($viettel, $array[$i]);
